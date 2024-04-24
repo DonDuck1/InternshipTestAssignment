@@ -1,0 +1,21 @@
+{
+  "name": "internship-test-assignment",
+  "version": "1.0.0",
+  "description": "A test assignment made for a possible internship. They serequirements via email.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DonDuck1/InternshipTestAssignment.git"
+  },
+  "author": "Joan M.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch "
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

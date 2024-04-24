@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "strict": false,
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "removeComments": true,
+        "outDir": "build/",
+        "noEmitOnError": true
+    },
+    "include": [
+        "src/*"
+, "src/app.ts"    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
