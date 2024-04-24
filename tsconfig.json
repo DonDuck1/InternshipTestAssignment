@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
 		"module": "esnext",
-        "target": "es2022",
+        "target": "ES2022",
         "strict": false,
         "sourceMap": true,
         "noImplicitAny": true,
@@ -14,7 +14,7 @@
     },
     "include": [
         "src/*"
-, "src/app.ts"    ],
+, "src/app.js"    ],
     "exclude": [
         "node_modules"
     ]
