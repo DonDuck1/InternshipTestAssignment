@@ -50,8 +50,10 @@ buttonForAssignment2.addEventListener("click", async function() {
 			const postsUserLiked = await getPostsThatUserLikedFromDatabase(userIdNumber);
 
 			for (let i = 0; i < postsUserLiked.data.length; i++) {
-				console.log(await postsUserLiked.data[i]);
-				addPostFromOwnApi(await postsUserLiked.data[i]);
+				const netLikesOfPost = await getNetLikesOfPost(postsUserLiked.data[i].blog_id)
+
+				console.log(await netLikesOfPost);
+				addPostFromOwnApi(await postsUserLiked.data[i], await netLikesOfPost.data['SUM(like)']);
 			}
 		} catch (error) {
 			console.log(error)
@@ -86,15 +88,27 @@ async function getPostsThatUserLikedFromDatabase(userIdToUse: number) {
 	return postsThatUserLikedFromDatabase;
 }
 
-function addPostFromOwnApi(post: {blog_id: number, user_id: number, post: string}): void {
+async function getNetLikesOfPost(blogId: number) {
+	const netLikesOfPost = await getApiData(
+		`https://internshiptestassignmentbackend.onrender.com/posts/${blogId}/totallikes`
+	);
+	return netLikesOfPost;
+}
+
+function addPostFromOwnApi(post: {blog_id: number, user_id: number, post: string}, netLikesOfPost: number): void {
 	const postDiv: HTMLDivElement = document.createElement('div');
 	const titleDiv: HTMLDivElement = document.createElement('div');
 	const bodyDiv: HTMLDivElement = document.createElement('div');
 
 	const titleText: HTMLParagraphElement = document.createElement('p');
+	const actualLikesSpan: HTMLSpanElement = document.createElement('span');
+	const likesTextSpan: HTMLSpanElement = document.createElement('span');
+	const likesText: HTMLParagraphElement = document.createElement('p');
 	const bodyText: HTMLParagraphElement = document.createElement('p');
-
-	titleText.innerHTML = `<b>Unknown title</b> - by user ${post.user_id}`
+	
+	titleText.innerHTML = `<b>Unknown title</b> - by user ${post.user_id}<br>`
+	actualLikesSpan.innerHTML = `${netLikesOfPost}`
+	likesTextSpan.innerHTML = ' net likes!'
 	titleText.style.fontSize = '18px';
 	bodyText.innerHTML = `${post.post}`
 
@@ -104,6 +118,15 @@ function addPostFromOwnApi(post: {blog_id: number, user_id: number, post: string
 
 	bodyDiv.style.paddingLeft = '16px';
 	bodyDiv.style.paddingRight = '16px';
+
+	if (netLikesOfPost > 0) {
+		actualLikesSpan.style.color = 'green';
+	} else if (netLikesOfPost < 0) {
+		actualLikesSpan.style.color = 'red';
+	}
+
+	titleText.append(actualLikesSpan);
+	titleText.append(likesTextSpan);
 
 	titleDiv.append(titleText);
 	bodyDiv.append(bodyText);
