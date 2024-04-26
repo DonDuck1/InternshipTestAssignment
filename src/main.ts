@@ -61,6 +61,75 @@ buttonForAssignment2.addEventListener("click", async function() {
 	})	
 });
 
+buttonForAssignment3.addEventListener("click", async function() {
+	clearAssignmentButtons();
+	
+	setupBackButtonAndTitle(3);
+
+	setupInputsForAddingPost();
+
+	document.getElementById('sendDataButton').addEventListener("click", async function() {
+		clearErrorAndSuccessMessages();
+
+		const emailString: string = (<HTMLInputElement> document.getElementById('email')).value;
+		const likesString: string = (<HTMLInputElement> document.getElementById('likes')).value;
+		const repostsString: string = (<HTMLInputElement> document.getElementById('reposts')).value;
+		const viewsString: string = (<HTMLInputElement> document.getElementById('views')).value;
+
+		try {
+			const dataForPost = {
+				email: emailString,
+				likes: likesString,
+				reposts: repostsString,
+				views: viewsString
+			};
+
+			const incomingJson = await postData("https://internshiptestassignmentbackend.onrender.com/posts", dataForPost);
+
+			const errors = await incomingJson.data;
+
+			if (await errors.length > 0) {
+				for (let i = 0; i < await errors.length; i++) {
+					const errorElement = document.getElementById(`${await errors[i].errorComponent}Errors`);
+					errorElement.append(`${await errors[i].errorMessage}.`);
+					errorElement.append(makeNewLineHTMLElement());
+				}
+			} else {
+				document.getElementById('successMessage').innerHTML = 'Information successfully sent!';
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	})	
+});
+
+
+async function postData(url: string, data: { email: string, likes: string, reposts: string, views: string }) {
+	const response = await fetch(url, {
+		method: "POST",
+		mode: "cors", // no-cors, *cors, same-origin
+		cache: "no-cache",
+		credentials: "same-origin", // include, *same-origin, omit
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		redirect: "manual", // manual, *follow, error
+		referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+		body: new URLSearchParams(data)
+	});
+
+	// return response.text(); // parses JSON response into native JavaScript objects
+	return response.json();
+}
+
+function clearErrorAndSuccessMessages() {
+	document.getElementById('emailErrors').replaceChildren();
+	document.getElementById('likesErrors').replaceChildren();
+	document.getElementById('repostsErrors').replaceChildren();
+	document.getElementById('viewsErrors').replaceChildren();
+	document.getElementById('successMessage').replaceChildren();
+}
+
 type Post = {
     blog_id: number;
     user_id: number;
@@ -125,8 +194,9 @@ function addPostFromOwnApi(post: {blog_id: number, user_id: number, post: string
 		actualLikesSpan.style.color = 'red';
 	}
 
-	titleText.append(actualLikesSpan);
-	titleText.append(likesTextSpan);
+	likesText.append(actualLikesSpan);
+	likesText.append(likesTextSpan);
+	titleText.append(likesText);
 
 	titleDiv.append(titleText);
 	bodyDiv.append(bodyText);
@@ -164,18 +234,95 @@ function clearAssignmentButtons(): void {
 	buttonForAssignment4.style.display = 'none';
 }
 
-function setupBackButtonTitleAndInput(assignmentNumber: number): void {
+function makeNewLineHTMLElement(): HTMLBRElement {
+	return document.createElement('br');
+}
+
+function setupInputsForAddingPost() {
+	const emailInputTitle: HTMLParagraphElement = document.createElement('p');
+	const emailInputErrors: HTMLParagraphElement = document.createElement('p');
+	const emailInput: HTMLInputElement = document.createElement('input');
+
+	const likesInputTitle: HTMLParagraphElement = document.createElement('p');
+	const likesInputErrors: HTMLParagraphElement = document.createElement('p');
+	const likesInput: HTMLInputElement = document.createElement('input');
+
+	const repostsInputTitle: HTMLParagraphElement = document.createElement('p');
+	const repostsInputErrors: HTMLParagraphElement = document.createElement('p');
+	const repostsInput: HTMLInputElement = document.createElement('input');
+
+	const viewsInputTitle: HTMLParagraphElement = document.createElement('p');
+	const viewsInputErrors: HTMLParagraphElement = document.createElement('p');
+	const viewsInput: HTMLInputElement = document.createElement('input');
+
+	const sendDataButton: HTMLButtonElement = document.createElement('button');
+
+	const successMessage: HTMLParagraphElement = document.createElement('p');
+
+	emailInputTitle.innerHTML = 'Email:'
+	likesInputTitle.innerHTML = 'Likes:'
+	repostsInputTitle.innerHTML = 'Reposts:'
+	viewsInputTitle.innerHTML = 'Views:'
+	sendDataButton.innerHTML = 'Send data';
+
+	emailInputTitle.style.marginBottom = '8px'
+	emailInputErrors.id = 'emailErrors';
+	emailInputErrors.style.color = 'red';
+	emailInput.id = 'email';
+
+	likesInputTitle.style.marginTop = '24px'
+	likesInputTitle.style.marginBottom = '8px'
+	likesInputErrors.id = 'likesErrors';
+	likesInputErrors.style.color = 'red';
+	likesInput.id = 'likes';
+
+	repostsInputTitle.style.marginTop = '24px'
+	repostsInputTitle.style.marginBottom = '8px'
+	repostsInputErrors.id = 'repostsErrors';
+	repostsInputErrors.style.color = 'red';
+	repostsInput.id = 'reposts';
+
+	viewsInputTitle.style.marginTop = '24px'
+	viewsInputTitle.style.marginBottom = '8px'
+	viewsInputErrors.id = 'viewsErrors';
+	viewsInputErrors.style.color = 'red';
+	viewsInput.id = 'views';
+
+	sendDataButton.id = 'sendDataButton';
+
+	successMessage.id = 'successMessage';
+
+	divToPutContent.append(emailInputTitle);
+	divToPutContent.append(emailInputErrors);
+	divToPutContent.append(emailInput);
+
+	divToPutContent.append(likesInputTitle);
+	divToPutContent.append(likesInputErrors);
+	divToPutContent.append(likesInput);
+
+	divToPutContent.append(repostsInputTitle);
+	divToPutContent.append(repostsInputErrors);
+	divToPutContent.append(repostsInput);
+
+	divToPutContent.append(viewsInputTitle);
+	divToPutContent.append(viewsInputErrors);
+	divToPutContent.append(viewsInput);
+
+	divToPutContent.append(makeNewLineHTMLElement());
+	divToPutContent.append(makeNewLineHTMLElement());
+
+	divToPutContent.append(sendDataButton);
+
+	divToPutContent.append(successMessage);
+}
+
+function setupBackButtonAndTitle(assignmentNumber: number): void {
 	const backButton: HTMLButtonElement = document.createElement('button');
 	const assignmentTitleDiv: HTMLDivElement = document.createElement('div');
 	const assignmentTitleText: HTMLParagraphElement = document.createElement('p');
-	const input: HTMLInputElement = document.createElement('input');
-	const inputSelectionButton: HTMLButtonElement = document.createElement('button');
-	const newLine: HTMLBRElement = document.createElement('br');
-	const divToPutPosts: HTMLDivElement = document.createElement('div');
 
 	backButton.innerHTML = 'Back to assignment selection';
 	assignmentTitleText.innerHTML = `<b>Assignment ${assignmentNumber}:</b>`;
-	inputSelectionButton.innerHTML = 'Select user';
 
 	backButton.addEventListener("click", function() {
 		resetHomescreen();
@@ -183,17 +330,29 @@ function setupBackButtonTitleAndInput(assignmentNumber: number): void {
 
 	assignmentTitleText.style.fontSize = '30px';
 	assignmentTitleText.style.textDecoration = 'underline';
-	input.id = 'userIdInput';
-	inputSelectionButton.id = 'userIdInputSelectionButton';
-	divToPutPosts.id = 'divToPutPosts';
 
 	assignmentTitleDiv.append(assignmentTitleText);
 
 	divToPutContent.append(backButton);
 	divToPutContent.append(assignmentTitleDiv);
+}
+
+function setupBackButtonTitleAndInput(assignmentNumber: number): void {
+	setupBackButtonAndTitle(assignmentNumber)
+
+	const input: HTMLInputElement = document.createElement('input');
+	const inputSelectionButton: HTMLButtonElement = document.createElement('button');
+	const divToPutPosts: HTMLDivElement = document.createElement('div');
+
+	inputSelectionButton.innerHTML = 'Select user';
+
+	input.id = 'userIdInput';
+	inputSelectionButton.id = 'userIdInputSelectionButton';
+	divToPutPosts.id = 'divToPutPosts';
+
 	divToPutContent.append(input);
 	divToPutContent.append(inputSelectionButton);
-	divToPutContent.append(newLine);
+	divToPutContent.append(makeNewLineHTMLElement());
 	divToPutContent.append(divToPutPosts);
 }
 
@@ -245,5 +404,3 @@ function selectPostsFromUser(posts: { userId: number, id: number, title: string,
 
 	return postsOfUser;
 }
-export { };
-
