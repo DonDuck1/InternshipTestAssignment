@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-		"module": "esnext",
+		"module": "ESNext",
         "target": "ES2022",
         "strict": false,
         "sourceMap": true,
@@ -10,7 +10,8 @@
         "noImplicitReturns": true,
         "removeComments": true,
         "outDir": "build/",
-        "noEmitOnError": true
+        "noEmitOnError": true,
+        "moduleResolution": "Bundler"
     },
     "include": [
         "src/*"
