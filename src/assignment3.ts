@@ -131,7 +131,8 @@ function setupButtonForAssignment3(buttons: HTMLButtonElement[], divToPutContent
                 };
     
                 const incomingJson: ErrorsFromMakingNewPost = await postData("https://internshiptestassignmentbackend.onrender.com/posts", dataForPost);
-    
+                console.log(incomingJson);
+
                 const errors: Error[] = incomingJson.data;
     
                 if (errors.length > 0) {
@@ -150,4 +151,4 @@ function setupButtonForAssignment3(buttons: HTMLButtonElement[], divToPutContent
     });
 }
 
-export { setupButtonForAssignment3 }
+export { setupButtonForAssignment3, postData }

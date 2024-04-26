@@ -9,14 +9,16 @@
         "noImplicitOverride": true,
         "noImplicitReturns": true,
         "removeComments": true,
-        "outDir": "build/",
-        "noEmitOnError": true,
-        "moduleResolution": "Bundler"
+        "outDir": "./build",
+        // "noEmitOnError": true,
+        "moduleResolution": "Bundler",
+        "esModuleInterop": true
     },
     "include": [
         "src/*"
 , "src/app.js"    ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "tests"
     ]
 }
