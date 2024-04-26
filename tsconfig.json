@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
-        "target": "es5",
+		"module": "ESNext",
+        "target": "ES2022",
         "strict": false,
         "sourceMap": true,
         "noImplicitAny": true,
@@ -8,13 +9,16 @@
         "noImplicitOverride": true,
         "noImplicitReturns": true,
         "removeComments": true,
-        "outDir": "build/",
-        "noEmitOnError": true
+        "outDir": "./build",
+        // "noEmitOnError": true,
+        "moduleResolution": "Bundler",
+        "esModuleInterop": true
     },
     "include": [
         "src/*"
-, "src/app.ts"    ],
+, "src/app.js"    ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "tests"
     ]
 }
