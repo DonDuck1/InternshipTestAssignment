@@ -1,5 +1,4 @@
-import { clearAssignmentButtons, clearPosts, setupBackButtonTitleAndInput } from './generalFunctions.js'
-import { getApiData } from './generalFunctions.js'
+import { clearAssignmentButtons, clearPosts, getApiData, setupBackButtonTitleAndInput } from './generalFunctions.js'
 import { PostFromOwnApi,netLikesOfPostFromOwnApi,  PostsFromOwnApi } from './types'
 
 async function getPostsThatUserLikedFromDatabase(userIdToUse: number): Promise<PostsFromOwnApi> {

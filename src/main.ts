@@ -3,6 +3,7 @@ export {}
 import { setupButtonForAssignment1 } from './assignment1.js'
 import { setupButtonForAssignment2 } from './assignment2.js'
 import { setupButtonForAssignment3 } from './assignment3.js'
+import { setupButtonForAssignment4 } from './assignment4.js'
 
 const divToPutContent: HTMLDivElement = <HTMLDivElement> document.getElementById('divToPutContent');
 
@@ -19,4 +20,4 @@ setupButtonForAssignment2(buttons, divToPutContent);
 
 setupButtonForAssignment3(buttons, divToPutContent);
 
-
+setupButtonForAssignment4(buttons, divToPutContent);
