@@ -30,4 +30,21 @@ type PostsFromOwnApi = {
     data: PostFromOwnApi[];
 };
 
-export { PostFromYourSurpriseApi, PostFromOwnApi, netLikesOfPostFromOwnApi, PostsFromOwnApi}
+type DataToMakeNewPost = { 
+    email: string;
+    likes: string;
+    reposts: string;
+    views: string;
+}
+
+type Error = {
+    errorComponent: string;
+    errorMessage: string;
+}
+
+type ErrorsFromMakingNewPost = {
+    meta: MetaFromOwnApi;
+    data: Error[];
+};
+
+export { PostFromYourSurpriseApi, PostFromOwnApi, netLikesOfPostFromOwnApi, PostsFromOwnApi, DataToMakeNewPost, Error, ErrorsFromMakingNewPost }

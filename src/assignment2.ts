@@ -1,4 +1,4 @@
-import { clearAssignmentButtons, clearPosts, setupBackButtonTitleAndInput, } from './generalFunctions.js'
+import { clearAssignmentButtons, clearPosts, setupBackButtonTitleAndInput } from './generalFunctions.js'
 import { getApiData } from './generalFunctions.js'
 import { PostFromOwnApi,netLikesOfPostFromOwnApi,  PostsFromOwnApi } from './types'
 
@@ -10,7 +10,7 @@ async function getPostsThatUserLikedFromDatabase(userIdToUse: number): Promise<P
 }
 
 async function getNetLikesOfPost(blogId: number): Promise<netLikesOfPostFromOwnApi> {
-	const netLikesOfPost = await getApiData(
+	const netLikesOfPost: netLikesOfPostFromOwnApi = await getApiData(
 		`https://internshiptestassignmentbackend.onrender.com/posts/${blogId}/totallikes`
 	);
 	return netLikesOfPost;

@@ -1,6 +1,7 @@
-import { clearAssignmentButtons, makeNewLineHTMLElement, setupBackButtonAndTitle, } from './generalFunctions.js'
+import { clearAssignmentButtons, makeNewLineHTMLElement, setupBackButtonAndTitle } from './generalFunctions.js'
+import { DataToMakeNewPost, Error, ErrorsFromMakingNewPost } from './types'
 
-async function postData(url: string, data: { email: string, likes: string, reposts: string, views: string }) {
+async function postData(url: string, data: {}) {
 	const response = await fetch(url, {
 		method: "POST",
 		mode: "cors", // no-cors, *cors, same-origin
@@ -122,21 +123,21 @@ function setupButtonForAssignment3(buttons: HTMLButtonElement[], divToPutContent
             const viewsString: string = (<HTMLInputElement> document.getElementById('views')).value;
     
             try {
-                const dataForPost = {
+                const dataForPost: DataToMakeNewPost = {
                     email: emailString,
                     likes: likesString,
                     reposts: repostsString,
                     views: viewsString
                 };
     
-                const incomingJson = await postData("https://internshiptestassignmentbackend.onrender.com/posts", dataForPost);
+                const incomingJson: ErrorsFromMakingNewPost = await postData("https://internshiptestassignmentbackend.onrender.com/posts", dataForPost);
     
-                const errors = await incomingJson.data;
+                const errors: Error[] = incomingJson.data;
     
-                if (await errors.length > 0) {
-                    for (let i = 0; i < await errors.length; i++) {
-                        const errorElement = document.getElementById(`${await errors[i].errorComponent}Errors`);
-                        errorElement.append(`${await errors[i].errorMessage}.`);
+                if (errors.length > 0) {
+                    for (let i = 0; i < errors.length; i++) {
+                        const errorElement: HTMLParagraphElement = <HTMLParagraphElement> document.getElementById(`${errors[i].errorComponent}Errors`);
+                        errorElement.append(`${errors[i].errorMessage}.`);
                         errorElement.append(makeNewLineHTMLElement());
                     }
                 } else {

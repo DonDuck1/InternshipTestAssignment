@@ -1,4 +1,4 @@
-import { clearAssignmentButtons, clearPosts, getApiData, setupBackButtonTitleAndInput, } from './generalFunctions.js'
+import { clearAssignmentButtons, clearPosts, getApiData, setupBackButtonTitleAndInput } from './generalFunctions.js'
 import { PostFromYourSurpriseApi } from './types'
 
 const allPostsFromYourSurpriseApi: PostFromYourSurpriseApi[] = await getApiData('https://jsonplaceholder.typicode.com/posts');
@@ -38,7 +38,7 @@ function addPostFromYourSurpriseApi(post: PostFromYourSurpriseApi): void {
 }
 
 function selectPostsFromUser(posts: PostFromYourSurpriseApi[], userIdToFind: number): PostFromYourSurpriseApi[] {
-	const postsOfUser: { userId: number, id: number, title: string, body: string }[] = posts.filter((post) => post.userId == userIdToFind);
+	const postsOfUser: PostFromYourSurpriseApi[] = posts.filter((post) => post.userId == userIdToFind);
 
 	return postsOfUser;
 }

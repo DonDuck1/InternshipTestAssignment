@@ -11,7 +11,7 @@ const buttonForAssignment2: HTMLButtonElement = <HTMLButtonElement> document.get
 const buttonForAssignment3: HTMLButtonElement = <HTMLButtonElement> document.getElementById('buttonForAssignment3');
 const buttonForAssignment4: HTMLButtonElement = <HTMLButtonElement> document.getElementById('buttonForAssignment4');
 
-const buttons = [buttonForAssignment1, buttonForAssignment2, buttonForAssignment3, buttonForAssignment4];
+const buttons: HTMLButtonElement[] = [buttonForAssignment1, buttonForAssignment2, buttonForAssignment3, buttonForAssignment4];
 
 setupButtonForAssignment1(buttons, divToPutContent);
 
