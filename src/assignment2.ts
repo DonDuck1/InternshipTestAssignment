@@ -1,6 +1,13 @@
 import { clearAssignmentButtons, clearPosts, getApiData, setupBackButtonTitleAndInput } from './generalFunctions.js'
 import { PostFromOwnApi,netLikesOfPostFromOwnApi,  PostsFromOwnApi } from './types'
 
+/**
+ * Function that gets the posts that a certain user liked from the database in the backend
+ * 
+ * @param {number} userIdToUse The userId of a certain user
+ * 
+ * @returns {Promise<PostsFromOwnApi>} The posts a certain user liked from the database in the backend
+ */
 async function getPostsThatUserLikedFromDatabase(userIdToUse: number): Promise<PostsFromOwnApi> {
 	const postsThatUserLikedFromDatabase = await getApiData(
 		`https://internshiptestassignmentbackend.onrender.com/posts/likedby/${userIdToUse}`
@@ -8,6 +15,13 @@ async function getPostsThatUserLikedFromDatabase(userIdToUse: number): Promise<P
 	return postsThatUserLikedFromDatabase;
 }
 
+/**
+ * Function that gets the net liked of a certain post
+ * 
+ * @param {number} blogId The blogId of a certain post
+ * 
+ * @returns {Promise<netLikesOfPostFromOwnApi>} The net likes of a certain post
+ */
 async function getNetLikesOfPost(blogId: number): Promise<netLikesOfPostFromOwnApi> {
 	const netLikesOfPost: netLikesOfPostFromOwnApi = await getApiData(
 		`https://internshiptestassignmentbackend.onrender.com/posts/${blogId}/totallikes`
@@ -15,6 +29,12 @@ async function getNetLikesOfPost(blogId: number): Promise<netLikesOfPostFromOwnA
 	return netLikesOfPost;
 }
 
+/**
+ * Function that adds a single post to the div with id "divToPutPosts"
+ * 
+ * @param {PostFromYourSurpriseApi} post A certain post from our my own backend
+ * @param {number} netLikesOfPost The net likes of the post
+ */
 function addPostFromOwnApi(post: PostFromOwnApi, netLikesOfPost: number): void {
 	const postDiv: HTMLDivElement = document.createElement('div');
 	const titleDiv: HTMLDivElement = document.createElement('div');
@@ -64,6 +84,12 @@ function addPostFromOwnApi(post: PostFromOwnApi, netLikesOfPost: number): void {
 	document.getElementById('divToPutPosts').append(postDiv);
 }
 
+/**
+ * Function that sets up the button that leads to a page for assignment 2
+ * 
+ * @param {HTMLButtonElement[]} buttons The buttons on the home page
+ * @param {HTMLDivElement} divToPutContent The div to put content in
+ */
 function setupButtonForAssignment2(buttons: HTMLButtonElement[], divToPutContent: HTMLDivElement) {
     buttons[1].addEventListener("click", async function() {
         clearAssignmentButtons(buttons);
@@ -73,7 +99,7 @@ function setupButtonForAssignment2(buttons: HTMLButtonElement[], divToPutContent
         document.getElementById('userIdInputSelectionButton').addEventListener("click", async function() {
             const userIdString: string = (<HTMLInputElement> document.getElementById('userIdInput')).value;
     
-            clearPosts()
+            clearPosts();
     
             try {
                 const userIdNumber: number = Number(userIdString);

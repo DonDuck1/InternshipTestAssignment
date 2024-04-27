@@ -1,13 +1,28 @@
+/**
+ * Function that clears the buttons on the main page, by setting their display to "none".
+ * 
+ * @param {HTMLButtonElement[]} buttons The buttons on the home page
+ */
 function clearAssignmentButtons(buttons: HTMLButtonElement[]): void {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].style.display = 'none';
     }
 }
 
+/**
+ * Function that clears the posts on the page, inside the div with id "divToPutPosts"
+ */
 function clearPosts(): void {
 	document.getElementById('divToPutPosts').replaceChildren();
 }
 
+/**
+ * Function that fetches data from an api.
+ * 
+ * @param {string} url The url of the api
+ * 
+ * @returns The response in json format
+ */
 async function getApiData(url: string) {
 	try {
 		let response = await fetch(url);
@@ -18,10 +33,21 @@ async function getApiData(url: string) {
 	}
 }
 
+/**
+ * A function that creates a HTMLBRElement
+ * 
+ * @returns {HTMLBRElement} A new HTMLBRElement
+ */
 function makeNewLineHTMLElement(): HTMLBRElement {
 	return document.createElement('br');
 }
 
+/**
+ * Function that resets the home screen
+ * 
+ * @param {HTMLButtonElement[]} buttons The buttons on the home page
+ * @param {HTMLDivElement} divToPutContent The div to put content in
+ */
 function resetHomescreen(buttons: HTMLButtonElement[], divToPutContent: HTMLDivElement): void {
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].style.display = 'inline-block';
@@ -30,6 +56,13 @@ function resetHomescreen(buttons: HTMLButtonElement[], divToPutContent: HTMLDivE
 	divToPutContent.replaceChildren();
 }
 
+/**
+ * Function that sets up a button that brings you back to the home page and a HTMLParagraphElement with the title
+ * 
+ * @param {number} assignmentNumber The number of the selected assignment
+ * @param {HTMLButtonElement[]} buttons The buttons on the home page
+ * @param {HTMLDivElement} divToPutContent The div to put content in
+ */
 function setupBackButtonAndTitle(assignmentNumber: number, buttons: HTMLButtonElement[], divToPutContent: HTMLDivElement): void {
 	const backButton: HTMLButtonElement = document.createElement('button');
 	const assignmentTitleDiv: HTMLDivElement = document.createElement('div');
@@ -51,6 +84,13 @@ function setupBackButtonAndTitle(assignmentNumber: number, buttons: HTMLButtonEl
 	divToPutContent.append(assignmentTitleDiv);
 }
 
+/**
+ * Function that sets up a button that brings you back to the home page, a HTMLParagraphElement with the title and an input to put the userId in
+ * 
+ * @param {number} assignmentNumber The number of the selected assignment
+ * @param {HTMLButtonElement[]} buttons The buttons on the home page
+ * @param {HTMLDivElement} divToPutContent The div to put content in
+ */
 function setupBackButtonTitleAndInput(assignmentNumber: number, buttons: HTMLButtonElement[], divToPutContent: HTMLDivElement): void {
 	setupBackButtonAndTitle(assignmentNumber, buttons, divToPutContent)
 

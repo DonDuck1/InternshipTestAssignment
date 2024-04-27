@@ -1,6 +1,14 @@
 import { clearAssignmentButtons, makeNewLineHTMLElement, setupBackButtonAndTitle } from './generalFunctions.js'
 import { DataToMakeNewPost, Error, ErrorsFromMakingNewPost } from './types'
 
+/**
+ * Function that sends a POST request with data to an api
+ * 
+ * @param {string} url Url of API
+ * @param {{}} data The data to put in the body of the request
+ * 
+ * @returns The response
+ */
 async function postData(url: string, data: {}) {
 	const response = await fetch(url, {
 		method: "POST",
@@ -19,6 +27,9 @@ async function postData(url: string, data: {}) {
 	return response.json();
 }
 
+/**
+ * Function that clears the previous error or success message(s)
+ */
 function clearErrorAndSuccessMessages() {
 	document.getElementById('emailErrors').replaceChildren();
 	document.getElementById('likesErrors').replaceChildren();
@@ -27,6 +38,11 @@ function clearErrorAndSuccessMessages() {
 	document.getElementById('successMessage').replaceChildren();
 }
 
+/**
+ * Function that sets up the inputs for adding a new post (sending data to the backend)
+ * 
+ * @param {HTMLDivElement} divToPutContent The div to put content in
+ */
 function setupInputsForAddingPost(divToPutContent: HTMLDivElement) {
 	const emailInputTitle: HTMLParagraphElement = document.createElement('p');
 	const emailInputErrors: HTMLParagraphElement = document.createElement('p');
@@ -105,7 +121,12 @@ function setupInputsForAddingPost(divToPutContent: HTMLDivElement) {
 	divToPutContent.append(successMessage);
 }
 
-
+/**
+ * Function that sets up the button that leads to a page for assignment 3
+ * 
+ * @param {HTMLButtonElement[]} buttons The buttons on the home page
+ * @param {HTMLDivElement} divToPutContent The div to put content in
+ */
 function setupButtonForAssignment3(buttons: HTMLButtonElement[], divToPutContent: HTMLDivElement) {
     buttons[2].addEventListener("click", async function() {
         clearAssignmentButtons(buttons);
