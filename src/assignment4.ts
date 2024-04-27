@@ -1,5 +1,11 @@
 import { clearAssignmentButtons, makeNewLineHTMLElement, setupBackButtonAndTitle } from './generalFunctions.js'
 
+/**
+ * Function that sets up the button that leads to a page for assignment 4
+ * 
+ * @param {HTMLButtonElement[]} buttons The buttons on the home page
+ * @param {HTMLDivElement} divToPutContent The div to put content in
+ */
 function setupButtonForAssignment4(buttons: HTMLButtonElement[], divToPutContent: HTMLDivElement) {
     buttons[3].addEventListener("click", async function() {
         clearAssignmentButtons(buttons);

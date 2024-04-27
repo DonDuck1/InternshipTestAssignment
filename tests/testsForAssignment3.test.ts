@@ -1,6 +1,16 @@
 import { postData } from '../src/assignment3.js';
 import { DataToMakeNewPost } from '../src/types';
 
+/**
+ * Function that creates an object with data for making a new post
+ * 
+ * @param {string} emailString A string with the email
+ * @param {string} likesString A string with the amount of likes
+ * @param {string} repostsString A string with the amount of reposts
+ * @param {string} viewsString A string with the amount of views
+ * 
+ * @returns {DataToMakeNewPost} An object with data for making a new post.
+ */
 function createDataForNewPost(emailString: string, likesString: string, repostsString: string, viewsString: string): DataToMakeNewPost {
     const dataForPost = {
         email: emailString,

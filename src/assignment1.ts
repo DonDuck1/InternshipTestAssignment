@@ -3,6 +3,11 @@ import { PostFromYourSurpriseApi } from './types'
 
 const allPostsFromYourSurpriseApi: PostFromYourSurpriseApi[] = await getApiData('https://jsonplaceholder.typicode.com/posts');
 
+/**
+ * Function that adds a single post to the div with id "divToPutPosts"
+ * 
+ * @param {PostFromYourSurpriseApi} post A post from the YourSurprise API
+ */
 function addPostFromYourSurpriseApi(post: PostFromYourSurpriseApi): void {
 	const postDiv: HTMLDivElement = document.createElement('div');
 	const titleDiv: HTMLDivElement = document.createElement('div');
@@ -37,12 +42,26 @@ function addPostFromYourSurpriseApi(post: PostFromYourSurpriseApi): void {
 	document.getElementById('divToPutPosts').append(postDiv);
 }
 
+/**
+ * Function that selects the posts of a certain user from an array of posts
+ * 
+ * @param {PostFromYourSurpriseApi[]} posts The array of posts to select the posts of a certain user from
+ * @param {number} userIdToFind The userId of the certain user
+ * 
+ * @returns {PostFromYourSurpriseApi[]} The posts of a certain user
+ */
 function selectPostsFromUser(posts: PostFromYourSurpriseApi[], userIdToFind: number): PostFromYourSurpriseApi[] {
 	const postsOfUser: PostFromYourSurpriseApi[] = posts.filter((post) => post.userId == userIdToFind);
 
 	return postsOfUser;
 }
 
+/**
+ * Function that sets up the button that leads to a page for assignment 1
+ * 
+ * @param {HTMLButtonElement[]} buttons The buttons on the home page
+ * @param {HTMLDivElement} divToPutContent The div to put content in
+ */
 function setupButtonForAssignment1(buttons: HTMLButtonElement[], divToPutContent: HTMLDivElement) {
     buttons[0].addEventListener("click", function() {
         clearAssignmentButtons(buttons);
@@ -52,7 +71,7 @@ function setupButtonForAssignment1(buttons: HTMLButtonElement[], divToPutContent
         document.getElementById('userIdInputSelectionButton').addEventListener("click", function() {
             const userIdString: string = (<HTMLInputElement> document.getElementById('userIdInput')).value;
     
-            clearPosts()
+            clearPosts();
     
             try {
                 const userIdNumber: number = Number(userIdString);
