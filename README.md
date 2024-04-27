@@ -12,3 +12,9 @@ $\quad$&quot;reposts&quot; : 8,\
 $\quad$&quot;views&quot;: 11\
 }
 4. Bonus: Write a unit test that tests the validation component from assignment 3
+
+The website is uploaded using Render, and can be accessed from the following link:\
+https://internshiptestassignment.onrender.com/
+
+In order for the website to function properly, the backend webservice should also be running. Because the version of Render used is the free one, the backend will go down when no traffic is detected within 2 minutes. When accessing the following link, the backend will go up again, which can take up to 5 minutes:\
+https://internshiptestassignmentbackend.onrender.com
